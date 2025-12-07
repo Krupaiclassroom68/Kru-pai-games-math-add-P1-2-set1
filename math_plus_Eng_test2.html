@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AddMaster Carry Edition · Kru Pai Classroom</title>
+
+<!-- ทำให้เต็มจอบนมือถือ -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        font-family: "Trebuchet MS", sans-serif;
+        background: #fceef7;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+    h1 {
+        font-size: 34px;
+        margin-top: 20px;
+        color: #d63384;
+    }
+    h2 {
+        color: #555;
+    }
+    .card {
+        max-width: 900px;
+        margin: 10px auto;
+        background: #ffffffcc;
+        border-radius: 18px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    .big-input {
+        font-size: 26px;
+        padding: 8px 15px;
+        border-radius: 10px;
+        border: 2px solid #ff99c8;
+        text-align: center;
+        width: 260px;
+    }
+    .main-btn {
+        background: linear-gradient(135deg,#ffb3d9,#ff66b2);
+        color: #fff;
+        border: none;
+        padding: 12px 30px;
+        font-size: 22px;
+        border-radius: 999px;
+        cursor: pointer;
+        margin-top: 15px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    .main-btn:hover {
+        transform: translateY(-1px);
+    }
+    .menu-title {
+        margin-top: 10px;
+        color: #666;
+    }
+    .set-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        margin: 6px 0;
+        flex-wrap: wrap;
+    }
+    .set-btn {
+        background: #ff99c8;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 999px;
+        font-size: 18px;
+        cursor: pointer;
+        color: #fff;
+        min-width: 90px;
+    }
+    .set-btn:hover {
+        background: #ff70b0;
+    }
+    .set-score {
+        font-size: 14px;
+        color: #666;
+        background: #f8f9fa;
+        padding: 4px 10px;
+        border-radius: 999px;
+        min-width: 120px;
+    }
+    .time-btn {
+        background: #ffe0f0;
+        border: 2px solid #ff99c8;
+        padding: 8px 20px;
+        border-radius: 999px;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 4px;
+    }
+    .time-btn.active {
+        background: #ff99c8;
+        color: #fff;
+    }
+    #timer {
+        font-size: 26px;
+        color: #d63384;
+        margin-top: 5px;
+    }
+    .question-box {
+        font-size: 32px;
+        margin: 10px 0;
+        padding: 6px;
+        color: #444;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+    .answer-input {
+        width: 120px;
+        font-size: 28px;
+        padding: 4px;
+        text-align: center;
+        border-radius: 10px;
+        border: 2px solid #ff99c8;
+    }
+    .marker {
+        font-size: 30px;
+        padding-left: 6px;
+    }
+    .marker.ok {
+        color: #28a745;
+    }
+    .marker.no {
+        color: #dc3545;
+    }
+    .check-btn {
+        background: linear-gradient(135deg,#ffd6e8,#ff8ac2);
+        border: none;
+        padding: 12px 32px;
+        border-radius: 999px;
+        font-size: 20px;
+        cursor: pointer;
+        margin-top: 15px;
+        color: #fff;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    .check-btn:hover {
+        transform: translateY(-1px);
+    }
+    #scoreBox {
+        margin-top: 15px;
+        padding: 15px;
+        border-radius: 16px;
+        background: #fff5fb;
+        border: 2px solid #ffb3d9;
+        font-size: 22px;
+        color: #444;
+    }
+    #backBtn {
+        margin-top: 20px;
+        background: #777;
+        color: #fff;
+        padding: 10px 26px;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+    #playerNameShow {
+        font-size: 18px;
+        color: #777;
+        margin-top: 5px;
+    }
+
+    /* ==== ปรับให้เต็มจอบนมือถือ ==== */
+    @media (max-width: 768px) {
+        body {
+            padding: 0;
+        }
+        .card {
+            max-width: 100%;
+            width: 100%;
+            margin: 0;
+            border-radius: 0;
+            min-height: 100vh;
+            padding: 16px 10px 20px 10px;
+        }
+        h1 {
+            font-size: 7vw;
+            margin-top: 12px;
+        }
+        h2 {
+            font-size: 5.2vw;
+        }
+        .menu-title,
+        .set-score,
+        #playerNameShow {
+            font-size: 4vw;
+        }
+        .big-input {
+            width: 80%;
+            font-size: 5.5vw;
+        }
+        .main-btn,
+        .check-btn,
+        .set-btn,
+        .time-btn,
+        #backBtn {
+            font-size: 4.5vw;
+            padding: 9px 18px;
+        }
+        .question-box {
+            font-size: 6.2vw;
+            line-height: 1.4;
+        }
+        .answer-input {
+            width: 26vw;
+            font-size: 6vw;
+            padding: 4px;
+        }
+        .marker {
+            font-size: 6.5vw;
+        }
+        #timer {
+            font-size: 5.5vw;
+        }
+        #scoreBox {
+            font-size: 5vw;
+        }
+    }
+</style>
+</head>
+<body>
+
+<h1>Kru Pai Classroom · AddMaster Carry Edition</h1>
+
+<!-- Start screen -->
+<div id="startScreen" class="card">
+    <h2>Type your name before you start</h2>
+    <input id="playerName" class="big-input" placeholder="Your nickname...">
+    <br>
+    <button class="main-btn" onclick="startHome()">Start</button>
+</div>
+
+<!-- Home / set selection -->
+<div id="home" class="card" style="display:none;">
+    <h2>Choose a practice set</h2>
+    <div id="playerNameShow"></div>
+    <p class="menu-title">20 sets · 10 questions in each set</p>
+
+    <h3>Sets 1–5: Single-digit + single-digit (no regrouping)</h3>
+    <div class="set-row">
+        <button class="set-btn" onclick="startSet(1)">Set 1</button>
+        <span class="set-score" id="scoreSet1">Not played</span>
+    </div>
+    <div class="set-row">
+        <button class="set-btn" onclick="startSet(2)">Set 2</button>
+        <span class="set-score" id="scoreSet2">Not played</span>
+    </div>
+    <div class="set-row">
+        <button class="set-btn" onclick="startSet(3)">Set 3</button>
+        <span class="set-score" id="scoreSet3">Not played</span>
+    </div>
+    <div class="set-row">
+        <button class="set-btn" onclick="startSet(4)">Set 4</button>
+        <span class="set-score" id="scoreSet4">Not played</span>
+    </div>
+    <div class="set-row">
+        <button class="set-btn" onclick="startSet(5)">Set 5</button>
+        <span class="set-score" id="scoreSet5">Not played</span>
+    </div>
+
+    <h3>Sets 6–11: Single-digit + single-digit (with regrouping)</h3>
+    <div class="set-row">
+        <button class="set-btn" onclick="startSet(6)">Set 6</button>
+        <span class="set-score" id="scoreSet6">Not played</span>
+    </div>
+    <div class="set-row">
+        <button class="set-btn" onclick="startSet(7)">Set 7</button>
+        <span class="set-score" id="scoreSet7">Not played</span>
+    </div>
+    <div class="set-row">
+        <button class="set-btn" onclick="startSet(8)">Set 8</button>
+        <span class="set-score" id="scoreSet8">Not played</span>
+    </div>
+    <div class="set-row">
+        <button class="set-btn" onclick="startSet(9)">Set 9</button>
+        <span class="set-score" id="scoreSet9">Not played</span>
+    </div>
+    <div class="set-row">
+        <button class="set-btn" onclick="startSet(10)">Set 10</button>
+        <span class="set-score" id="scoreSet10">Not played</span>
+    </div>
+    <div class="set-row">
+        <button class="set-btn" onclick="startSet(11)">Set 11</button>
+        <span class="set-score" id="scoreSet11">Not played</span>
+    </div>
+
+    <h3>Sets 12–20: Two-digit + one-digit (with regrouping)</h3>
+    <div class="set-row">
+        <button class="set-btn" onclick="startSet(12)">Set 12</button>
+        <span class="set-score" id="scoreSet12">Not played</span>
+    </div>
+    <div class="set-row">
+        <button class="set-btn" onclick="startSet(13)">Set 13</button>
+        <span class="set-score" id="scoreSet13">Not played</span>
+    </div>
+    <div class="set-row">
+        <button class="set-btn" onclick="startSet(14)">Set 14</button>
+        <span class="set-score" id="scoreSet14">Not played</span>
+    </div>
+    <div class="set-row">
+        <button class="set-btn" onclick="startSet(15)">Set 15</button>
+        <span class="set-score" id="scoreSet15">Not played</span>
+    </div>
+    <div class="set-row">
+        <button class="set-btn" onclick="startSet(16)">Set 16</button>
+        <span class="set-score" id="scoreSet16">Not played</span>
+    </div>
+    <div class="set-row">
+        <button class="set-btn" onclick="startSet(17)">Set 17</button>
+        <span class="set-score" id="scoreSet17">Not played</span>
+    </div>
+    <div class="set-row">
+        <button class="set-btn" onclick="startSet(18)">Set 18</button>
+        <span class="set-score" id="scoreSet18">Not played</span>
+    </div>
+    <div class="set-row">
+        <button class="set-btn" onclick="startSet(19)">Set 19</button>
+        <span class="set-score" id="scoreSet19">Not played</span>
+    </div>
+    <div class="set-row">
+        <button class="set-btn" onclick="startSet(20)">Set 20</button>
+        <span class="set-score" id="scoreSet20">Not played</span>
+    </div>
+
+    <h3>Timer mode</h3>
+    <button id="timeOnBtn"  class="time-btn"        onclick="setTimer(true)">Timed · 60 seconds</button>
+    <button id="timeOffBtn" class="time-btn active" onclick="setTimer(false)">No timer</button>
+</div>
+
+<!-- Game screen -->
+<div id="game" class="card" style="display:none;">
+    <h2 id="setTitle"></h2>
+    <div id="timer"></div>
+    <div id="questionArea"></div>
+    <button class="check-btn" onclick="checkAnswers()">Check answers</button>
+    <div id="scoreBox" style="display:none;"></div>
+    <button id="backBtn" onclick="goHome()">Back to set menu</button>
+</div>
+
+<script>
+let isTimed = false;
+let timerCount = 60;
+let timerInterval;
+let currentSet = 1;
+let problems = [];
+let scores = Array(21).fill(null); // index 1–20
+let playerName = "";
+let alreadyChecked = false;
+
+// simple click sound
+let audioCtx = null;
+function playClick() {
+    try {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        const o = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        o.connect(g);
+        g.connect(audioCtx.destination);
+        o.frequency.value = 650;
+        o.type = "sine";
+        const now = audioCtx.currentTime;
+        g.gain.setValueAtTime(0.08, now);
+        g.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+        o.start(now);
+        o.stop(now + 0.12);
+    } catch (e) {}
+}
+
+function startHome() {
+    playClick();
+    const nameInput = document.getElementById("playerName").value.trim();
+    playerName = nameInput || "Student";
+    document.getElementById("playerNameShow").innerText = "Player: " + playerName;
+    document.getElementById("startScreen").style.display = "none";
+    document.getElementById("home").style.display = "block";
+    updateScoreboard();
+}
+
+function setTimer(choice) {
+    playClick();
+    isTimed = choice;
+    const onBtn  = document.getElementById("timeOnBtn");
+    const offBtn = document.getElementById("timeOffBtn");
+    if (isTimed) {
+        onBtn.classList.add("active");
+        offBtn.classList.remove("active");
+    } else {
+        offBtn.classList.add("active");
+        onBtn.classList.remove("active");
+    }
+}
+
+function startSet(setNum) {
+    playClick();
+    currentSet = setNum;
+    alreadyChecked = false;
+    document.getElementById("scoreBox").style.display = "none";
+    document.getElementById("scoreBox").innerHTML = "";
+    generateQuestions();
+    document.getElementById("setTitle").innerText = "Practice set " + currentSet;
+    document.getElementById("home").style.display = "none";
+    document.getElementById("game").style.display = "block";
+
+    clearInterval(timerInterval);
+    if (isTimed) {
+        timerCount = 60;
+        document.getElementById("timer").innerHTML = "⏳ Time left: " + timerCount + " s";
+        timerInterval = setInterval(function() {
+            timerCount--;
+            document.getElementById("timer").innerHTML = "⏳ Time left: " + timerCount + " s";
+            if (timerCount <= 0) {
+                clearInterval(timerInterval);
+                if (!alreadyChecked) {
+                    checkAnswers();
+                }
+            }
+        }, 1000);
+    } else {
+        document.getElementById("timer").innerHTML = "";
+    }
+}
+
+function generateQuestions() {
+    problems = [];
+    const qArea = document.getElementById("questionArea");
+    qArea.innerHTML = "";
+
+    for (let i = 0; i < 10; i++) {
+        let a, b;
+
+        if (currentSet <= 5) {
+            // Sets 1–5: single-digit + single-digit, NO regrouping (sum <= 9)
+            do {
+                a = Math.floor(Math.random() * 9) + 1; // 1–9
+                b = Math.floor(Math.random() * 9) + 1;
+            } while (a + b > 9);
+        } else if (currentSet <= 11) {
+            // Sets 6–11: single-digit + single-digit, WITH regrouping (sum >= 10)
+            do {
+                a = Math.floor(Math.random() * 9) + 1;
+                b = Math.floor(Math.random() * 9) + 1;
+            } while (a + b < 10);
+        } else {
+            // Sets 12–20: two-digit + one-digit, WITH regrouping (units place causes carry)
+            b = Math.floor(Math.random() * 9) + 1;
+            let unitsMin = 10 - b;
+            if (unitsMin < 0) unitsMin = 0;
+            let units = unitsMin + Math.floor(Math.random() * (10 - unitsMin)); // unitsMin..9
+            let tens = Math.floor(Math.random() * 4) + 1; // tens 1–4 => 10–49
+            a = tens * 10 + units;
+        }
+
+        problems.push({a, b});
+
+        const div = document.createElement("div");
+        div.className = "question-box";
+        div.id = "qBox" + i;
+        div.innerHTML = `
+            <span>${a} + ${b} =</span>
+            <input class="answer-input" id="ans${i}" />
+            <span class="marker" id="mark${i}"></span>
+        `;
+        qArea.appendChild(div);
+    }
+}
+
+function checkAnswers() {
+    if (alreadyChecked) return;
+    alreadyChecked = true;
+    playClick();
+    clearInterval(timerInterval);
+
+    let score = 0;
+    for (let i = 0; i < problems.length; i++) {
+        const input = document.getElementById("ans"+i);
+        const mark  = document.getElementById("mark"+i);
+        const userAns = parseInt(input.value);
+        const correct = problems[i].a + problems[i].b;
+
+        if (userAns === correct) {
+            score++;
+            mark.textContent = "✓";
+            mark.classList.remove("no");
+            mark.classList.add("ok");
+        } else {
+            mark.textContent = "✗";
+            mark.classList.remove("ok");
+            mark.classList.add("no");
+        }
+    }
+
+    scores[currentSet] = score;
+    updateScoreboard();
+
+    const box = document.getElementById("scoreBox");
+    box.style.display = "block";
+    let msg = "";
+    if (score === 10) {
+        msg = "Amazing, " + playerName + "! You got 10 / 10 🎉";
+    } else if (score >= 7) {
+        msg = "Great job, " + playerName + "! You got " + score + " / 10. Keep practicing! 💖";
+    } else {
+        msg = playerName + ", you got " + score + " / 10. That’s okay — try the set again! ✨";
+    }
+    box.innerHTML = msg;
+}
+
+function updateScoreboard() {
+    for (let s = 1; s <= 20; s++) {
+        const span = document.getElementById("scoreSet"+s);
+        if (!span) continue;
+        if (scores[s] === null) {
+            span.textContent = "Not played";
+        } else {
+            span.textContent = "Last: " + scores[s] + "/10";
+        }
+    }
+}
+
+function goHome() {
+    playClick();
+    clearInterval(timerInterval);
+    document.getElementById("game").style.display = "none";
+    document.getElementById("home").style.display = "block";
+}
+</script>
+
+</body>
+</html>
